@@ -27,3 +27,6 @@ nbdist/
 
 ### gitignore ###
 .gitignore
+
+### logignore ###
+.log
