@@ -1,6 +1,10 @@
 package com.pepper.boot.service;
 
+import redis.clients.jedis.Jedis;
+
 public interface RedisService {
+	
+	
 	/**
 	 * get value by key
 	 * @param key
@@ -38,4 +42,22 @@ public interface RedisService {
 	 * @param key
 	 */
 	public void del(String key);
+	/**
+	 * add lock
+	 * @see http://mp.weixin.qq.com/s/qJK61ew0kCExvXrqb7-RSg
+	 * @param jedis Redis客户端
+     * @param key 锁
+     * @param requestId 请求标识
+     * @param expireTime 超期时间
+     * @return 是否获取成功
+	 */
+	public boolean lock(Jedis jedis,String key,String requestId,int expireTime);
+	/**
+	 * release lock
+     * @param jedis Redis客户端
+     * @param key 锁
+     * @param requestId 请求标识
+     * @return 是否释放成功
+	 */
+	public boolean unLock(Jedis jedis,String key,String requestId);
 }

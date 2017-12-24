@@ -90,4 +90,11 @@
       mobile = #{mobile,jdbcType=VARCHAR}
     where user_id = #{userId,jdbcType=INTEGER}
   </update>
+  
+  <select id="selectAllUsers" resultMap="BaseResultMap">
+  	select <include refid="Base_Column_List"/>
+  	from  user_info
+  	where 1=1
+  </select>
+  
 </mapper>

@@ -1,5 +1,7 @@
 package com.pepper.boot.serviceImpl;
 
+import java.util.List;
+
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,6 +25,35 @@ public class UserInfoServiceImpl implements UserInfoService {
 	public static final String USER_KEY = Const.PREFIX + "userId_";
 
 	@Override
+	public void addUser(UserInfo user) {
+		userInfoMapper.insertSelective(user);
+		
+	}
+
+	@Override
+	public void delUser(int userId) {
+		userInfoMapper.deleteByPrimaryKey(userId);
+		
+	}
+
+	@Override
+	public void updateUser(UserInfo user) {
+		userInfoMapper.updateByPrimaryKeySelective(user);
+		
+	}
+
+	@Override
+	public UserInfo getUser(int userId) {
+		return userInfoMapper.selectByPrimaryKey(userId);
+	}
+	
+	@Override
+	public List<UserInfo> getAllUsers() {
+		return userInfoMapper.selectAllUsers();
+	}
+	
+	
+	@Override
 	public UserInfo getUserDetail(int userId) {
 		UserInfo data = null;
 		String key = USER_KEY + userId;
@@ -41,5 +72,6 @@ public class UserInfoServiceImpl implements UserInfoService {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
 
 }

@@ -63,7 +63,7 @@ public class AMQPConfig {
         return new TopicExchange("exchange");
     }
 
-
+	//将队列topic.rabbit与exchange绑定，binding_key为topic.exchange
 	public @Bean Binding bindingRabbit(Queue queueRabbit, TopicExchange exchange) {
 		return BindingBuilder.bind(queueRabbit).to(exchange).with("topic.rabbit");
 	}
