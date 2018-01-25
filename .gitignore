@@ -30,3 +30,7 @@ nbdist/
 
 ### logignore ###
 .log
+
+### other ignore ###
+.metadata/
+Servers/
