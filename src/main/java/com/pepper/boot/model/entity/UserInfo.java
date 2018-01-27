@@ -1,53 +1,58 @@
 package com.pepper.boot.model.entity;
 
-public class UserInfo {
-    private Integer userId;
+import java.io.Serializable;
 
-    private String userName;
+public class UserInfo implements Serializable {
 
-    private Integer age;
+	private static final long serialVersionUID = 6080848905250708585L;
 
-    private String sex;
+	private Integer userId;
 
-    private String mobile;
+	private String userName;
 
-    public Integer getUserId() {
-        return userId;
-    }
+	private Integer age;
 
-    public void setUserId(Integer userId) {
-        this.userId = userId;
-    }
+	private String sex;
 
-    public String getUserName() {
-        return userName;
-    }
+	private String mobile;
 
-    public void setUserName(String userName) {
-        this.userName = userName == null ? null : userName.trim();
-    }
+	public Integer getUserId() {
+		return userId;
+	}
 
-    public Integer getAge() {
-        return age;
-    }
+	public void setUserId(Integer userId) {
+		this.userId = userId;
+	}
 
-    public void setAge(Integer age) {
-        this.age = age;
-    }
+	public String getUserName() {
+		return userName;
+	}
 
-    public String getSex() {
-        return sex;
-    }
+	public void setUserName(String userName) {
+		this.userName = userName == null ? null : userName.trim();
+	}
 
-    public void setSex(String sex) {
-        this.sex = sex == null ? null : sex.trim();
-    }
+	public Integer getAge() {
+		return age;
+	}
 
-    public String getMobile() {
-        return mobile;
-    }
+	public void setAge(Integer age) {
+		this.age = age;
+	}
 
-    public void setMobile(String mobile) {
-        this.mobile = mobile == null ? null : mobile.trim();
-    }
+	public String getSex() {
+		return sex;
+	}
+
+	public void setSex(String sex) {
+		this.sex = sex == null ? null : sex.trim();
+	}
+
+	public String getMobile() {
+		return mobile;
+	}
+
+	public void setMobile(String mobile) {
+		this.mobile = mobile == null ? null : mobile.trim();
+	}
 }

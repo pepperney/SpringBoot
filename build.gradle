@@ -46,7 +46,7 @@ dependencies {
    
 	compile('com.google.guava:guava:18.0')
 	
-	compile('io.netty:netty-all:5.0.0.Alpha1')
+	compile('io.netty:netty-all:4.0.55.Final')
 	
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 }
