@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.pepper.boot.dao.UserInfoMapper" >
-  <resultMap id="BaseResultMap" type="com.pepper.boot.model.entity.UserInfo" >
+<mapper namespace="com.pepper.web.dao.UserInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.pepper.web.model.entity.UserInfo" >
     <id column="user_id" property="userId" jdbcType="INTEGER" />
     <result column="user_name" property="userName" jdbcType="VARCHAR" />
     <result column="age" property="age" jdbcType="INTEGER" />
@@ -21,13 +21,13 @@
     delete from user_info
     where user_id = #{userId,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.pepper.boot.model.entity.UserInfo" >
+  <insert id="insert" parameterType="com.pepper.web.model.entity.UserInfo" >
     insert into user_info (user_id, user_name, age, 
       sex, mobile)
     values (#{userId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{age,jdbcType=INTEGER}, 
       #{sex,jdbcType=CHAR}, #{mobile,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.pepper.boot.model.entity.UserInfo" >
+  <insert id="insertSelective" parameterType="com.pepper.web.model.entity.UserInfo" >
     insert into user_info
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="userId != null" >
@@ -64,7 +64,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.pepper.boot.model.entity.UserInfo" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.pepper.web.model.entity.UserInfo" >
     update user_info
     <set >
       <if test="userName != null" >
@@ -82,7 +82,7 @@
     </set>
     where user_id = #{userId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.pepper.boot.model.entity.UserInfo" >
+  <update id="updateByPrimaryKey" parameterType="com.pepper.web.model.entity.UserInfo" >
     update user_info
     set user_name = #{userName,jdbcType=VARCHAR},
       age = #{age,jdbcType=INTEGER},
