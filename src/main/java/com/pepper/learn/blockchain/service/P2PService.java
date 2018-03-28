@@ -15,32 +15,29 @@ import com.pepper.learn.blockchain.model.Transaction;
 import com.pepper.learn.blockchain.model.Wallet;
 
 /**
- * p2p公用服务类
- * 
- * @author aaron
- *
+ * @author pei.nie
  */
-@Service("pspService")
+@Service("p2pService")
 public class P2PService {
 	private List<WebSocket> sockets;
 	private BlockService blockService;
-	//查询最新的区块
+	/**查询最新的区块*/
 	public final static int QUERY_LATEST_BLOCK = 0;
-	//查询整个区块链
+	/**查询整个区块链*/
 	public final static int QUERY_BLOCKCHAIN = 1;
-	//查询交易集合
+	/**查询交易集合*/
 	public final static int QUERY_TRANSACTION = 2;
-	//查询已打包交易集合
+	/**查询已打包交易集合*/
 	public final static int QUERY_PACKED_TRANSACTION = 3;
-	//查询钱包集合
+	/**查询钱包集合*/
 	public final static int QUERY_WALLET = 4;
-	//返回区块集合
+	/**返回区块集合*/
 	public final static int RESPONSE_BLOCKCHAIN = 5;
-	//返回交易集合
+	/**返回交易集合*/
 	public final static int RESPONSE_TRANSACTION = 6;
-	//返回已打包交易集合
+	/**返回已打包交易集合*/
 	public final static int RESPONSE_PACKED_TRANSACTION = 7;
-	//返回钱包集合
+	/**返回钱包集合*/
 	public final static int RESPONSE_WALLET = 8;
 
 	public P2PService(BlockService blockService) {
@@ -94,6 +91,7 @@ public class P2PService {
 	public synchronized void handleBlockChainResponse(String message, List<WebSocket> sockets) {
 		List<Block> receiveBlockchain = JSON.parseArray(message, Block.class);
 		Collections.sort(receiveBlockchain, new Comparator<Block>() {
+			@Override
 			public int compare(Block block1, Block block2) {
 				return block1.getIndex() - block2.getIndex();
 			}

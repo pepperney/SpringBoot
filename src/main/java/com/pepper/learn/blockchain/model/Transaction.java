@@ -7,7 +7,7 @@ import com.pepper.learn.blockchain.pwdutil.RSAUtil;
 /**
  * 交易
  * 
- * @author aaron
+ * @author pei.nie
  *
  */
 public class Transaction {
@@ -66,7 +66,7 @@ public class Transaction {
 	 * @return
 	 */
 	public boolean coinbaseTx() {
-		return txIn.getTxId().equals("0") && getTxIn().getValue() == -1;
+		return "0".equals(txIn.getTxId()) && getTxIn().getValue() == -1;
 	}
 
 	/**
@@ -152,18 +152,23 @@ public class Transaction {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (obj == null)
+		}
+		if (obj == null) {
 			return false;
-		if (getClass() != obj.getClass())
+		}
+		if (getClass() != obj.getClass()) {
 			return false;
+		}
 		Transaction other = (Transaction) obj;
 		if (id == null) {
-			if (other.id != null)
+			if (other.id != null) {
 				return false;
-		} else if (!id.equals(other.id))
+			}
+		} else if (!id.equals(other.id)) {
 			return false;
+		}
 		return true;
 	}
 

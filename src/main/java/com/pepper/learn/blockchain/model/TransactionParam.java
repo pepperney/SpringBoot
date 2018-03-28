@@ -3,7 +3,7 @@ package com.pepper.learn.blockchain.model;
 /**
  * 交易接口参数
  * 
- * @author aaron
+ * @author pei.nie
  *
  */
 public class TransactionParam {

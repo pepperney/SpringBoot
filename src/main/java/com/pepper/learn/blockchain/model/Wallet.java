@@ -8,7 +8,7 @@ import com.pepper.learn.blockchain.pwdutil.RSAUtil;
 /**
  * 钱包
  * 
- * @author aaron
+ * @author pei.nie
  *
  */
 public class Wallet {
@@ -70,12 +70,12 @@ public class Wallet {
 	}
 
 	/**
-	 * 获取钱包地址
+	 * 获取钱包地址--公钥hash之后MD5
 	 * 
 	 * @return
 	 */
 	public String getAddress() {
-		String publicKeyHash = hashPubKey(publicKey);
+		String publicKeyHash = Wallet.hashPubKey(publicKey);
 		return EncryptUtil.MD5(publicKeyHash);   
 	}
 

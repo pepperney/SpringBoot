@@ -35,7 +35,7 @@ public class BlockChainController {
 	P2PService p2pService;
 
 	/**
-	 * 查看区块链
+	 * 1.查看区块链
 	 * @return
 	 */
 	@RequestMapping("/chain")
@@ -44,7 +44,7 @@ public class BlockChainController {
 	}
 
 	/**
-	 * 创建钱包
+	 * 2.创建钱包
 	 * @return
 	 */
 	@RequestMapping("/wallet/create")
@@ -57,7 +57,7 @@ public class BlockChainController {
 	}
 
 	/**
-	 * 获取所有钱包
+	 * 3.获取所有钱包
 	 * @return
 	 */
 	@RequestMapping("/wallet/get")
@@ -66,7 +66,7 @@ public class BlockChainController {
 	}
 
 	/**
-	 * 查询钱包余额
+	 * 4.查询钱包余额--复杂情况查询utxo需调整
 	 * @param address
 	 * @return
 	 */
@@ -76,7 +76,7 @@ public class BlockChainController {
 	}
 
 	/**
-	 * 挖矿
+	 * 5.挖矿
 	 * @param address
 	 * @return
 	 */
@@ -99,7 +99,7 @@ public class BlockChainController {
 	}
 
 	/**
-	 * 转账交易
+	 * 6.转账交易--复杂情况需调整
 	 * @param txParam
 	 * @return
 	 */
@@ -116,7 +116,7 @@ public class BlockChainController {
 
 		Transaction newTransaction = blockService.createTransaction(senderWallet, recipientWallet, txParam.getAmount());
 		if (newTransaction == null) {
-			return "钱包" + txParam.getSender() + "余额不足或该钱包找不到一笔等于" + txParam.getAmount() + "BTC的UTXO";
+			return "钱包" + txParam.getSender() + "余额不足或该钱包找不到一笔大于等于" + txParam.getAmount() + "BTC的UTXO";
 		} else {
 			Transaction[] txs = { newTransaction };
 			String msg = JSON.toJSONString(new Message(P2PService.RESPONSE_TRANSACTION, JSON.toJSONString(txs)));
@@ -126,7 +126,7 @@ public class BlockChainController {
 	}
 
 	/**
-	 * 获取当前节点未打包的交易
+	 * 7.获取当前节点未打包的交易
 	 * @return
 	 */
 	@RequestMapping("/transactions/unpacked/get")
@@ -137,7 +137,7 @@ public class BlockChainController {
 	}
 
 	/**
-	 * 查询所有socket节点
+	 * 8.查询所有socket节点
 	 */
 	@RequestMapping("/peers")
 	public void getAllPeers() {

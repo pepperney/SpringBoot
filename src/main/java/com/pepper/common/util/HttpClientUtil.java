@@ -716,13 +716,14 @@ public final class HttpClientUtil {
 	public static DefaultHttpClient wrapClient() throws Exception {
 		SSLContext ctx = SSLContext.getInstance("TLS");
 		X509TrustManager tm = new X509TrustManager() {
+			@Override
 			public X509Certificate[] getAcceptedIssuers() {
 				return null;
 			}
-
+			@Override
 			public void checkClientTrusted(X509Certificate[] arg0, String arg1) throws CertificateException {
 			}
-
+			@Override
 			public void checkServerTrusted(X509Certificate[] arg0, String arg1) throws CertificateException {
 			}
 		};

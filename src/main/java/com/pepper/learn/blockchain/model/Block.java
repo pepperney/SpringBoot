@@ -5,7 +5,7 @@ import java.util.List;
 /**
  * 区块结构
  * 
- * @author aaron
+ * @author pei.nie
  *
  */
 public class Block {

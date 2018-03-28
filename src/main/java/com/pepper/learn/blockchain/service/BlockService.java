@@ -93,9 +93,9 @@ public class BlockService {
 			return false;
 		} else {
 			// 验证新区块hash值的正确性
-			String hash = calculateHash(newBlock.getPreviousHash(), newBlock.getTransactions(), newBlock.getNonce());
+			String hash = this.calculateHash(newBlock.getPreviousHash(), newBlock.getTransactions(), newBlock.getNonce());
 			if (!hash.equals(newBlock.getHash())) {
-				System.out.println("新区块的hash无效: " + hash + " " + newBlock.getHash());
+				System.out.println("新区块的hash无效: " + hash + " = " + newBlock.getHash());
 				return false;
 			}
 			if (!isValidHash(newBlock.getHash())) {
@@ -183,11 +183,11 @@ public class BlockService {
 	 */
 	public Block mine(String toAddress) {
 		// 创建系统奖励的交易
-		allTransactions.add(newCoinbaseTx(toAddress));
+		allTransactions.add(createCoinbaseTx(toAddress));
 		// 去除已打包进区块的交易
 		List<Transaction> blockTxs = new ArrayList<Transaction>(allTransactions);
 		blockTxs.removeAll(packedTransactions);
-		verifyAllTransactions(blockTxs);
+		this.verifyAllTransactions(blockTxs);
 
 		String newBlockHash = "";
 		int nonce = 0;
@@ -234,7 +234,7 @@ public class BlockService {
 	 * @param data
 	 * @return
 	 */
-	public Transaction newCoinbaseTx(String toAddress) {
+	public Transaction createCoinbaseTx(String toAddress) {
 		TransactionInput txIn = new TransactionInput("0", -1, null, null);
 		Wallet wallet = myWalletMap.get(toAddress);
 		//指定生成区块的奖励为10BTC

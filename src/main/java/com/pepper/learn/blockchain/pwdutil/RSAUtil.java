@@ -20,7 +20,7 @@ import javax.crypto.Cipher;
  * RSA安全编码组件
  * 
  */
-public abstract class RSAUtil extends EncodeUtil {
+public class RSAUtil extends EncodeUtil {
 	public static final String KEY_ALGORITHM = "RSA";
 	public static final String SIGNATURE_ALGORITHM = "MD5withRSA";
 

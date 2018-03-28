@@ -14,7 +14,7 @@ import sun.misc.BASE64Encoder;
  * 基础加密组件
  * 
  */
-public abstract class EncodeUtil {
+public class EncodeUtil {
 	public static final String KEY_SHA = "SHA";
 	public static final String KEY_MD5 = "MD5";
 

@@ -38,9 +38,9 @@ public class BeanUtil extends BeanUtils {
 	}
 
 	public static <T> T copyProperties(Object sourceObj, Class<T> targetClazz, String... ignoreProperties) {
-		if (sourceObj == null)
+		if (sourceObj == null){
 			return null;
-
+		}
 		T targetObj = null;
 		try {
 			targetObj = (T) targetClazz.newInstance();
@@ -94,7 +94,7 @@ public class BeanUtil extends BeanUtils {
 		for (int i = 0; i < propertyDescriptors.length; i++) {
 			PropertyDescriptor descriptor = propertyDescriptors[i];
 			String propertyName = descriptor.getName();
-			if (!propertyName.equals("class")) {
+			if (!"class".equals(propertyName)) {
 				Method readMethod = descriptor.getReadMethod();
 				Object result = readMethod.invoke(bean, new Object[0]);
 				if (result != null) {

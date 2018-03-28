@@ -8,7 +8,7 @@ import com.pepper.common.util.MD5Utils;
 /**
  * 加密工具类
  * 
- * @author aaron.rao
+ * @author pei.nie
  *
  */
 public class EncryptUtil {

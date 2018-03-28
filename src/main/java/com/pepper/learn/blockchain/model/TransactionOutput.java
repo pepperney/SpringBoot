@@ -3,7 +3,7 @@ package com.pepper.learn.blockchain.model;
 /**
  * 交易输出
  * 
- * @author aaron
+ * @author pei.nie
  *
  */
 public class TransactionOutput {

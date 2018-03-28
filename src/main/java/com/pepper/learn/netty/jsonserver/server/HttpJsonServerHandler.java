@@ -43,6 +43,7 @@ public class HttpJsonServerHandler extends SimpleChannelInboundHandler<HttpJsonR
 		ChannelFuture future = ctx.writeAndFlush(new HttpJsonResponse(null, order));
 		if (!HttpHeaders.isKeepAlive(request)) {
 			future.addListener(new GenericFutureListener<Future<? super Void>>() {
+				@Override
 				@SuppressWarnings("rawtypes")
 				public void operationComplete(Future future) throws Exception {
 					ctx.close();

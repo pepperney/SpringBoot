@@ -1,11 +1,11 @@
 package com.pepper.config.amqp;
 
 import org.springframework.amqp.rabbit.annotation.RabbitHandler;
-import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Component;
 
 @Component
-@RabbitListener(queues = "topic.rocket")
+//需要使用的时候打开注释
+/*@RabbitListener(queues = "topic.rocket")*/
 public class Consumer2 {
 	
 	@RabbitHandler

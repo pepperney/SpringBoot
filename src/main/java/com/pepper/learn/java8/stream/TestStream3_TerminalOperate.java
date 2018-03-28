@@ -117,10 +117,11 @@ public class TestStream3_TerminalOperate {
 									.map(Employee::getName)
 									.flatMap(TestStream2_MiddleOperate::filterCharacter)
 									.map((ch) -> {
-										if(ch.equals('六'))
+										if(ch.equals('六')) {
 											return 1;
-										else 
+										} else {
 											return 0;
+										}
 									})
 									.reduce(Integer::sum);
 		System.out.println(sum.get());
@@ -192,12 +193,13 @@ public class TestStream3_TerminalOperate {
 	@Test
 	public void test_mutil_group() {
 		Map<Status, Map<String, List<Employee>>> map = emps.stream().collect(Collectors.groupingBy(Employee::getStatus, Collectors.groupingBy((Employee e) -> {
-			if (e.getAge() >= 60)
+			if (e.getAge() >= 60) {
 				return "老年";
-			else if (e.getAge() >= 35)
+			} else if (e.getAge() >= 35) {
 				return "中年";
-			else
+			} else {
 				return "成年";
+			}
 		})));
 		System.out.println(map);
 	}

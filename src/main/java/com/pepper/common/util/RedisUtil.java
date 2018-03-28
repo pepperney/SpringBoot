@@ -13,13 +13,11 @@ import redis.clients.jedis.Jedis;
 @Component
 public class RedisUtil {
 
-
-	
 	private static final String LOCK_SUCCESS = "OK";
-    private static final String SET_IF_NOT_EXIST = "NX";
-    private static final String SET_WITH_EXPIRE_TIME = "PX";
-    private static final Long RELEASE_SUCCESS = 1L;
-	
+	private static final String SET_IF_NOT_EXIST = "NX";
+	private static final String SET_WITH_EXPIRE_TIME = "PX";
+	private static final Long RELEASE_SUCCESS = 1L;
+
 	@Autowired
 	StringRedisTemplate stringRedisTemplate;
 
@@ -87,10 +85,10 @@ public class RedisUtil {
 	 * add lock
 	 * @see http://mp.weixin.qq.com/s/qJK61ew0kCExvXrqb7-RSg
 	 * @param jedis Redis客户端
-     * @param key 锁
-     * @param requestId 请求标识
-     * @param expireTime 超期时间
-     * @return 是否获取成功
+	 * @param key 锁
+	 * @param requestId 请求标识
+	 * @param expireTime 超期时间
+	 * @return 是否获取成功
 	 *
 	 * jedis.set(String key, String value, String nxxx, String expx, int time)，这个set()方法一共有五个形参： 
 	 * 第一个为key，我们使用key来当锁，因为key是唯一的。
@@ -121,10 +119,10 @@ public class RedisUtil {
 
 	/**
 	 * release lock
-     * @param jedis Redis客户端
-     * @param key 锁
-     * @param requestId 请求标识
-     * @return 是否释放成功
+	 * @param jedis Redis客户端
+	 * @param key 锁
+	 * @param requestId 请求标识
+	 * @return 是否释放成功
 	 *
 	 * 第一行代码，写了一个简单的Lua脚本代码，将Lua代码传到jedis.eval()方法里，并使参数KEYS[1]赋值为key，
 	 * ARGV[1]赋值为requestId。eval()方法是将Lua代码交给Redis服务端执行。 这段Lua代码的功能是:首先获取锁
@@ -142,5 +140,21 @@ public class RedisUtil {
 		return false;
 	}
 
+	public Long increment(String key) {
+		return stringRedisTemplate.opsForValue().increment(key, 1);
+	}
 
+	public Long increment(String key, Long step) {
+		return stringRedisTemplate.opsForValue().increment(key, step);
+	}
+	
+	/**
+	 * let the key expire in exipreTime seconds
+	 * @param key
+	 * @param exipreTime
+	 * @return
+	 */
+	public Boolean expire(String key,int exipreTime){
+		return stringRedisTemplate.expire(key, exipreTime, TimeUnit.SECONDS);
+	}
 }
