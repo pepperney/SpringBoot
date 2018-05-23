@@ -8,6 +8,7 @@ public enum SystemCode {
 	CHECK_UNAUTHORIZED   	("401","unauthorized"),
 	CHECK_FORBIDDEN			("403","forbidden"),
 	SYSTEM_ERROR			("500","系统异常"),
+	ILLEGAL_PARAM			("610","参数错误"),
 	TOKEN_ERROR				("611","token异常"),
 	FILE_NOT_FOUND			("612","找不到文件"),
 	CONNECT_TIMEOUT			("613","连接超时"),

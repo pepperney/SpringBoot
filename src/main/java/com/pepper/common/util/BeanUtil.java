@@ -1,5 +1,7 @@
 package com.pepper.common.util;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.FatalBeanException;
@@ -18,6 +20,9 @@ import java.lang.reflect.Modifier;
 import java.util.*;
 
 public class BeanUtil extends BeanUtils {
+
+	protected static final Logger logger = LoggerFactory.getLogger(BeanUtil.class);
+
 
 	/**
 	 * 拷贝对象属性到目标对象
@@ -85,7 +90,7 @@ public class BeanUtil extends BeanUtils {
 	 * @throws IllegalAccessException	   如果实例化 JavaBean 失败
 	 * @throws InvocationTargetException	   如果调用属性的 setter 方法失败
 	 */
-	public static Map<String, Object> convertBean(Object bean) throws IntrospectionException, IllegalAccessException, InvocationTargetException {
+	public static Map<String, Object> convertBeanToMap(Object bean) throws IntrospectionException, IllegalAccessException, InvocationTargetException {
 		Class<? extends Object> type = bean.getClass();
 		Map<String, Object> returnMap = new HashMap<String, Object>();
 		BeanInfo beanInfo = Introspector.getBeanInfo(type);
@@ -193,5 +198,37 @@ public class BeanUtil extends BeanUtils {
 			}
 		}
 	}
+
+
+
+
+
+
+	public static <T> Map<String, String> beanToMap(T bean) {
+		Map<String, String> map = new HashMap<>();
+		try {
+			Class<? extends Object> type = bean.getClass();
+			BeanInfo beanInfo = Introspector.getBeanInfo(type);
+			PropertyDescriptor[] propertyDescriptors = beanInfo.getPropertyDescriptors();
+			for (int i = 0; i < propertyDescriptors.length; i++) {
+				PropertyDescriptor descriptor = propertyDescriptors[i];
+				String propertyName = descriptor.getName();
+				if (!"class".equals(propertyName)) {
+					Method readMethod = descriptor.getReadMethod();
+					Object result = readMethod.invoke(bean, new Object[0]);
+					if (result != null) {
+						map.put(propertyName, JsonUtil.toJson(result));
+					} else {
+						map.put(propertyName, "");
+					}
+				}
+			}
+		} catch (Exception e) {
+			logger.error("Bean转Map异常",e);
+		}
+		return map;
+	}
+
+
 
 }

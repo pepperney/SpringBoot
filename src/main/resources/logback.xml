@@ -47,7 +47,7 @@
   
   <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
     <encoder>
-      <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} ${LOG_LEVEL_PATTERN:-%5p} ${PID:- } -- [%t] %-40.40logger - %line{39} [TxId=%X{PtxId} , SpanId=%X{PspanId}] %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}</pattern>
+      <pattern>${LOG_LEVEL_PATTERN:-%5p} - %line{39}   %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}</pattern>
     </encoder>
   </appender>
   

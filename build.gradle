@@ -24,15 +24,19 @@ repositories {
 
 
 dependencies {
+	compile('org.springframework.boot:spring-boot-starter-web')
 	compile('org.springframework.boot:spring-boot-starter-aop')
 	compile('org.springframework.boot:spring-boot-starter-amqp')
 	compile('org.springframework.boot:spring-boot-starter-data-redis')
-	compile('org.springframework.boot:spring-boot-starter-web')
+	compile('org.springframework.boot:spring-boot-starter-test')
+	compile('org.mybatis.spring.boot:mybatis-spring-boot-starter:1.3.1')
+
+
+	compile('org.springframework.retry:spring-retry')
 	
 	compile('com.alibaba:druid:1.1.5')
 	compile('mysql:mysql-connector-java:5.1.38')
-	compile('org.mybatis.spring.boot:mybatis-spring-boot-starter:1.3.1')
-		
+
 	compile('commons-httpclient:commons-httpclient:3.1')
 	compile('commons-fileupload:commons-fileupload:1.3.1')
 	compile('commons-codec:commons-codec:1.10')
@@ -42,14 +46,16 @@ dependencies {
     compile('org.apache.httpcomponents:httpmime:4.5.1')
     compile('org.apache.httpcomponents:fluent-hc:4.5.1')
     compile('org.apache.commons:commons-lang3:3.4')
-   
+
 	compile('com.google.guava:guava:18.0')
-	
+	compile('org.aspectj:aspectjweaver')
+	compile('junit:junit:4.12')
+
 	compile('io.netty:netty-all:4.0.55.Final')
 	
 	compile('com.alibaba:fastjson:1.2.40')
 	
 	compile('org.java-websocket:Java-WebSocket:1.3.4')
 	
-	testCompile('org.springframework.boot:spring-boot-starter-test')
+
 }
