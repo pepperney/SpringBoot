@@ -47,7 +47,7 @@
   
   <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
     <encoder>
-      <pattern>${LOG_LEVEL_PATTERN:-%5p} - %line{39}   %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}</pattern>
+      <pattern>line-%line{39}   %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}</pattern>
     </encoder>
   </appender>
   

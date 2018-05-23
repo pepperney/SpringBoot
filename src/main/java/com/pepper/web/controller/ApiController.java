@@ -69,9 +69,9 @@ public class ApiController {
      */
     @GetMapping("/testGet")
     public String get() {
-        String url = "http://localhost:9090/mine";
+        String url = "http://localhost:9090/api/userInfo";
         Map<String, String> params = new HashMap<>();
-        params.put("address", "12345");
+        params.put("userId", "1");
         String result = HttpUtil.get(url, params, null);
         return result;
     }

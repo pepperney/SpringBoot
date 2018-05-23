@@ -18,7 +18,7 @@ public class AspectUtil {
 	private static final Logger log = LoggerFactory.getLogger(AspectUtil.class);
 
 	@SuppressWarnings("rawtypes")
-	@Around("execution(* com.pepper.boot.controller.*Controller.*(..))")
+	@Around("execution(* com.pepper.web.controller.*Controller.*(..))")
 	public Object process(ProceedingJoinPoint joinPoint) throws Throwable {
 		Object respData;
 		long startTime = System.currentTimeMillis();
