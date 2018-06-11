@@ -1,23 +1,20 @@
 package com.pepper.web.controller;
 
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.pepper.common.consts.Const;
 import com.pepper.common.util.JsonUtil;
-import com.pepper.web.model.entity.RetryTask;
+import com.pepper.web.model.MqMsg;
 import com.pepper.web.service.ApiService;
-import com.pepper.web.service.RetryService;
-import com.pepper.web.serviceImpl.MyRetryServiceImpl;
+import com.pepper.web.service.RabbitSender;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
 
 import com.pepper.common.util.HttpUtil;
-import com.pepper.config.amqp.Producer;
 import com.pepper.web.model.CommonResp;
 import com.pepper.web.model.entity.UserInfo;
 import com.pepper.web.service.UserInfoService;
@@ -33,7 +30,7 @@ public class ApiController {
     private ApiService apiService;
 
     @Autowired
-    private Producer producer;
+    private RabbitSender rabbitSender;
 
 
     /**
@@ -57,7 +54,10 @@ public class ApiController {
      */
     @GetMapping("/send")
     public ResponseEntity<Object> send() {
-        producer.send();
+        MqMsg mqMsg1 = new MqMsg(Const.MQ_EXCHANGE_TEST,"key.topic.test.1","hello,this is test message_1");
+        rabbitSender.send(mqMsg1);
+        MqMsg mqMsg2 = new MqMsg(Const.MQ_EXCHANGE_TEST,"key.topic.test.2","hello,this is test message_2");
+        rabbitSender.send(mqMsg2);
         return CommonResp.returnOK();
     }
 

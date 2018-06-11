@@ -1,6 +1,7 @@
 package com.pepper.web.serviceImpl;
 
 import com.pepper.common.util.JsonUtil;
+import com.pepper.common.util.ThreadPoolUtil;
 import com.pepper.web.model.entity.RetryTask;
 import com.pepper.web.service.ApiService;
 import com.pepper.web.service.RetryService;
@@ -28,6 +29,12 @@ public class ApiServiceImpl implements ApiService {
         retryTask.setStatus(RetryTask.STATUS_DEFAULT);
         retryTask.setUrl("https://wwww.baiduyixialuanqiba.com");
         myRetryService.addRetryTask(retryTask);
-        myRetryService.retry(retryTask);
+        ThreadPoolUtil.execute(new Runnable() {
+            @Override
+            public void run() {
+                myRetryService.retry(retryTask);
+            }
+        });
+
     }
 }

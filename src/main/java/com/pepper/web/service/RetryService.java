@@ -13,6 +13,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
 import java.util.ArrayList;
@@ -26,6 +27,7 @@ import java.util.stream.Collectors;
  *
  * @param <T>
  */
+@Service
 public abstract class RetryService<T> {
 
     protected static final Logger logger = LoggerFactory.getLogger(RetryService.class);
@@ -79,8 +81,7 @@ public abstract class RetryService<T> {
     /**
      * 远程方法调用
      *
-     * @param url
-     * @param params
+     * @param retryTask
      * @return
      */
     protected String invokeRemote(RetryTask retryTask) {
