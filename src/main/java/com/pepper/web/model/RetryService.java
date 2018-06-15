@@ -1,8 +1,8 @@
-package com.pepper.web.service;
+package com.pepper.web.model;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.pepper.common.consts.SystemCode;
+import com.pepper.common.consts.Code;
 import com.pepper.common.exception.NetException;
 import com.pepper.common.util.BeanUtil;
 import com.pepper.common.util.HttpUtil;
@@ -14,13 +14,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.util.CollectionUtils;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 /**
  * 抽象重试方法：建议根据业务重写dealRetryParams()方法
@@ -97,10 +93,10 @@ public abstract class RetryService<T> {
             logger.info("请求地址[{}]的入参={},响应={}", url, JsonUtil.toJson(params), result);
         } catch (RuntimeException e) {
             logger.error("请求[" + url + "]异常", e);
-            throw new NetException(SystemCode.SYSTEM_ERROR.getCode(), e.getMessage());
+            throw new NetException(Code.SYSTEM_ERROR.getCode(), e.getMessage());
         }
         if (StringUtils.isBlank(result)) {
-            throw new NetException(SystemCode.SYSTEM_ERROR.getCode(), "请求[" + url + "]响应数据为空");
+            throw new NetException(Code.SYSTEM_ERROR.getCode(), "请求[" + url + "]响应数据为空");
         }
         return result;
     }

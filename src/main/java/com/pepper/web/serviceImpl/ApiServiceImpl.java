@@ -4,7 +4,6 @@ import com.pepper.common.util.JsonUtil;
 import com.pepper.common.util.ThreadPoolUtil;
 import com.pepper.web.model.entity.RetryTask;
 import com.pepper.web.service.ApiService;
-import com.pepper.web.service.RetryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

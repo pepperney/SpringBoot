@@ -1,36 +1,40 @@
 package com.pepper.common.exception;
 
-import com.pepper.common.consts.SystemCode;
+import com.pepper.common.consts.Code;
 
 public class CustomException extends RuntimeException {
 
 	private static final long serialVersionUID = 7393177901625809149L;
 
-	private SystemCode systemCode;
+	private Code code;
 
-	public CustomException(SystemCode systemCode) {
-		super(systemCode.getMessage());
+	public CustomException(Code code) {
+		super(code.getMsg());
 
-		this.systemCode = systemCode;
+		this.code = code;
 	}
 
-	public CustomException(SystemCode systemCode, String message) {
+	public CustomException(Code code, String message) {
 		super(message);
 
-		this.systemCode = systemCode;
+		this.code = code;
 	}
 
-	public CustomException(SystemCode systemCode, String message, Throwable t) {
+	public CustomException(Code code, String message, Throwable t) {
 		super(message, t);
 
-		this.systemCode = systemCode;
+		this.code = code;
 	}
 
 	public String getCode() {
-		return this.systemCode.getCode();
+		return this.code.getCode();
 	}
 
-	public SystemCode getErrorCode() {
-		return this.systemCode;
+	public String getMessage(){
+		return this.code.getMsg();
+	}
+
+	public Code getErrorCode() {
+		return this.code;
 	}
 }

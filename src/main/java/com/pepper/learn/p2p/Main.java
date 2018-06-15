@@ -1,4 +1,4 @@
-package com.pepper.learn.p2pdemo;
+package com.pepper.learn.p2p;
 
 /**
  * 区块链节点启动入口

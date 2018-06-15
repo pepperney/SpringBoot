@@ -1,0 +1,30 @@
+# application port
+server:
+  port: 9090
+
+# application name
+spring:
+  application:
+    name: SpringBoot
+
+
+# config log
+logging:
+  config: classpath:config/logback.xml
+  path: /home/nulo/logs/${spring.application.name}
+  level:
+    ROOT : WARN
+    com.pepper : INFO
+
+# config security
+api:
+  security:
+    timestamp:
+      need: false
+      milliseconds: 300000
+    securityChains:
+      - /**/api/userInfo=sign
+      - /**/api/**=sign
+      - /**/file/**=none
+      - /** = none
+

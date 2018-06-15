@@ -4,10 +4,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.pepper.common.consts.Const;
-import com.pepper.common.util.JsonUtil;
 import com.pepper.web.model.MqMsg;
 import com.pepper.web.service.ApiService;
-import com.pepper.web.service.RabbitSender;
+import com.pepper.web.helper.RabbitSender;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

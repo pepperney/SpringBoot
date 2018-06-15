@@ -1,9 +1,6 @@
-package com.pepper.config;
+package com.pepper.web.config;
 
 import com.pepper.common.consts.Const;
-import org.springframework.amqp.core.Binding;
-import org.springframework.amqp.core.BindingBuilder;
-import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.core.TopicExchange;
 import org.springframework.amqp.rabbit.config.SimpleRabbitListenerContainerFactory;
 import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
@@ -15,6 +12,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.annotation.Scope;
 
 
@@ -25,6 +23,7 @@ import org.springframework.context.annotation.Scope;
  * 将队列topic.rocket与exchange绑定，binding_key为topic.#,模糊匹配
  */
 @Configuration
+@PropertySource("classpath:config/config.properties")
 public class MQConfig {
 
 

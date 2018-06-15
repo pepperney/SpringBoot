@@ -5,7 +5,7 @@ import java.io.Serializable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
-import com.pepper.common.consts.SystemCode;
+import com.pepper.common.consts.Code;
 import com.pepper.common.util.JsonUtil;
 
 public class CommonResp implements Serializable {
@@ -20,11 +20,11 @@ public class CommonResp implements Serializable {
 
 	}
 
-	public CommonResp(SystemCode code) {
+	public CommonResp(Code code) {
 		this.setErrorCode(code);
 	}
 
-	public CommonResp(SystemCode code, String message) {
+	public CommonResp(Code code, String message) {
 		setErrorCode(code);
 		setMessage(message);
 	}
@@ -45,9 +45,9 @@ public class CommonResp implements Serializable {
 		this.message = message;
 	}
 
-	public void setErrorCode(SystemCode code) {
+	public void setErrorCode(Code code) {
 		this.code = code.getCode();
-		this.message = code.getMessage();
+		this.message = code.getMsg();
 	}
 
 	public String asJson() {
@@ -62,19 +62,19 @@ public class CommonResp implements Serializable {
 		return new ResponseEntity<Object>(HttpStatus.OK);
 	}
 
-	public static ResponseEntity<Object> returnErr(SystemCode code) {
+	public static ResponseEntity<Object> returnErr(Code code) {
 		return returnErr(code, 610);
 	}
 
-	public static ResponseEntity<Object> returnErrResult(SystemCode code, String message) {
+	public static ResponseEntity<Object> returnErrResult(Code code, String message) {
 		return returnErrResult(code, message, 610);
 	}
 
-	public static ResponseEntity<Object> returnErr(SystemCode code, Integer statusCode) {
+	public static ResponseEntity<Object> returnErr(Code code, Integer statusCode) {
 		return new ResponseEntity<Object>(new CommonResp(code), HttpStatus.valueOf(statusCode));
 	}
 
-	public static ResponseEntity<Object> returnErrResult(SystemCode code, String message, Integer statusCode) {
+	public static ResponseEntity<Object> returnErrResult(Code code, String message, Integer statusCode) {
 		return new ResponseEntity<Object>(new CommonResp(code, message), HttpStatus.valueOf(statusCode));
 	}
 

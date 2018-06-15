@@ -1,5 +1,6 @@
-package com.pepper.web.service;
+package com.pepper.web.helper;
 
+import com.pepper.web.helper.RabbitConsumer;
 import com.pepper.web.model.MqMsg;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

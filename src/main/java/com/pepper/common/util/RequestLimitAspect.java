@@ -2,6 +2,7 @@ package com.pepper.common.util;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.pepper.web.helper.RedisHelper;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
@@ -14,7 +15,7 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import com.pepper.common.annotation.RequestLimit;
-import com.pepper.common.consts.SystemCode;
+import com.pepper.common.consts.Code;
 import com.pepper.common.exception.CustomException;
 
 @Aspect
@@ -24,7 +25,7 @@ public class RequestLimitAspect {
 	private static final Logger logger = LoggerFactory.getLogger(RequestLimitAspect.class);
 
 	@Autowired
-	private RedisUtil redisUtil;
+	private RedisHelper redisHelper;
 	
 	@Pointcut("@annotation(com.pepper.common.annotation.RequestLimit)")  
     public void requestPoint(){  
@@ -37,13 +38,13 @@ public class RequestLimitAspect {
 		String ip = IPUtil.getClientIP(request);
 		String url = request.getRequestURL().toString();
 		String key = "req_limit_".concat(url).concat(ip);
-		long count = redisUtil.increment(key, 1L);
+		long count = redisHelper.increment(key, 1L);
 		if (count > 0) {
-			redisUtil.expire(key, limit.time());
+			redisHelper.expire(key, limit.time());
 		}
 		if (count > limit.count()) {
 			logger.info("用户IP[" + ip + "]访问地址[" + url + "]超过了限定的次数[" + limit.count() + "]");
-			throw new CustomException(SystemCode.SYSTEM_ERROR, "您的操作太过频繁，请稍后再试");
+			throw new CustomException(Code.SYSTEM_ERROR, "您的操作太过频繁，请稍后再试");
 		}
 
 	}

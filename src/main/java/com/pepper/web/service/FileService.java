@@ -7,7 +7,7 @@ import org.springframework.http.ResponseEntity;
 public interface FileService {
 	/**
 	 * 根据文件地址下载文件
-	 * @param path
+	 * @param filename
 	 */
 	public ResponseEntity<byte[]> download(String filename, HttpServletRequest request);
 	

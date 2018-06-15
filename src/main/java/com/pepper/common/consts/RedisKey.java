@@ -2,33 +2,48 @@ package com.pepper.common.consts;
 
 public enum RedisKey {
 
-	TOKEN_KEY	(RedisKey.PREFIX + "token", 30 * 60 * 20);
 
-	public static final String PREFIX = "system_";
 
-	private String key;
+    TOKEN       (RedisKey.PREFIX + "token_", 1 * 24 * 60 * 60),
 
-	private Integer expireTime;
+    USER_ID     (RedisKey.PREFIX + "userId_", 5 * 60),
 
-	RedisKey(String key, Integer expireTime) {
-		this.key = key;
-		this.expireTime = expireTime;
-	}
+    ;
 
-	public String getKey() {
-		return key;
-	}
 
-	public void setKey(String key) {
-		this.key = key;
-	}
 
-	public Integer getExpireTime() {
-		return expireTime;
-	}
 
-	public void setExpireTime(Integer expireTime) {
-		this.expireTime = expireTime;
-	}
+
+
+
+
+
+    /** global redis key prefix */
+    public static final String PREFIX = "rd_";
+
+    private String key;
+
+    private Integer expireTime;
+
+    RedisKey(String key, Integer expireTime) {
+        this.key = key;
+        this.expireTime = expireTime;
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
+    }
+
+    public Integer getExpireTime() {
+        return expireTime;
+    }
+
+    public void setExpireTime(Integer expireTime) {
+        this.expireTime = expireTime;
+    }
 
 }

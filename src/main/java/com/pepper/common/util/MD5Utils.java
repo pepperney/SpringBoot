@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.security.MessageDigest;
 
-import com.pepper.common.consts.SystemCode;
+import com.pepper.common.consts.Code;
 import com.pepper.common.exception.CustomException;
 
 public class MD5Utils {
@@ -23,7 +23,7 @@ public class MD5Utils {
 			byte[] md5Bytes = md5.digest(input.getBytes(CHARSET));
 			return byte2hex(md5Bytes);
 		} catch (Exception e) {
-			throw new CustomException(SystemCode.FILE_NOT_FOUND, e.getMessage());
+			throw new CustomException(Code.FILE_NOT_FOUND, e.getMessage());
 		}
 	}
 
@@ -51,7 +51,7 @@ public class MD5Utils {
 		try {
 			return md5(new FileInputStream(filename));
 		} catch (FileNotFoundException e) {
-			throw new CustomException(SystemCode.FILE_NOT_FOUND, e.getMessage());
+			throw new CustomException(Code.FILE_NOT_FOUND, e.getMessage());
 		}
 	}
 
@@ -70,13 +70,13 @@ public class MD5Utils {
 			byte[] md5Bytes = md.digest();
 			return byte2hex(md5Bytes);
 		} catch (Exception e) {
-			throw new CustomException(SystemCode.FILE_NOT_FOUND, e.getMessage());
+			throw new CustomException(Code.FILE_NOT_FOUND, e.getMessage());
 		} finally {
 			if (bufferedInputStream != null) {
 				try {
 					bufferedInputStream.close();
 				} catch (IOException e) {
-					throw new CustomException(SystemCode.FILE_NOT_FOUND, e.getMessage());
+					throw new CustomException(Code.FILE_NOT_FOUND, e.getMessage());
 				}
 			}
 		}

@@ -14,21 +14,21 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
-    from user_info
+    from t_user_info
     where user_id = #{userId,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from user_info
+    delete from t_user_info
     where user_id = #{userId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.pepper.web.model.entity.UserInfo" >
-    insert into user_info (user_id, user_name, age, 
+    insert into t_user_info (user_id, user_name, age, 
       sex, mobile)
     values (#{userId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{age,jdbcType=INTEGER}, 
       #{sex,jdbcType=CHAR}, #{mobile,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.pepper.web.model.entity.UserInfo" >
-    insert into user_info
+    insert into t_user_info
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="userId != null" >
         user_id,
@@ -65,7 +65,7 @@
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.pepper.web.model.entity.UserInfo" >
-    update user_info
+    update t_user_info
     <set >
       <if test="userName != null" >
         user_name = #{userName,jdbcType=VARCHAR},
@@ -83,7 +83,7 @@
     where user_id = #{userId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.pepper.web.model.entity.UserInfo" >
-    update user_info
+    update t_user_info
     set user_name = #{userName,jdbcType=VARCHAR},
       age = #{age,jdbcType=INTEGER},
       sex = #{sex,jdbcType=CHAR},
@@ -93,7 +93,7 @@
   
   <select id="selectAllUsers" resultMap="BaseResultMap">
   	select <include refid="Base_Column_List"/>
-  	from  user_info
+  	from  t_user_info
   	where 1=1
   </select>
   

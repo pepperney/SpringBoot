@@ -62,7 +62,7 @@ import org.apache.http.util.EntityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.pepper.common.consts.SystemCode;
+import com.pepper.common.consts.Code;
 import com.pepper.common.exception.CustomException;
 
 
@@ -427,7 +427,7 @@ public final class HttpClientUtil {
 			return mapResponse;
 		}catch(Exception e){
 			log.error("发送请求异常："+e);
-			throw new CustomException(SystemCode.CONNECT_TIMEOUT);
+			throw new CustomException(Code.CONNECT_TIMEOUT);
 		}finally{
 			httpClient.getConnectionManager().shutdown();
 		}
@@ -948,7 +948,7 @@ public final class HttpClientUtil {
 			log.debug(reqURL+"请求返回状态:" + response.getStatusLine().getStatusCode() + "  返回信息:" + result);
 		}catch(Exception e){
 			log.error("发送请求异常："+e);
-			throw new CustomException(SystemCode.CONNECT_TIMEOUT);
+			throw new CustomException(Code.CONNECT_TIMEOUT);
 		}finally{
 			httpClient.getConnectionManager().shutdown();
 		}

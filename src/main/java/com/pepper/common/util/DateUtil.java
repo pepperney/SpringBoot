@@ -1,6 +1,6 @@
 package com.pepper.common.util;
 
-import com.pepper.common.consts.SystemCode;
+import com.pepper.common.consts.Code;
 import com.pepper.common.exception.CustomException;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.DateUtils;
@@ -87,7 +87,7 @@ public class DateUtil extends DateUtils {
      */
     public static int dateDiff(Date d1, Date d2, ChronoUnit unit) {
         if (null == d1 || null == d2) {
-            throw new CustomException(SystemCode.ILLEGAL_PARAM, "日期不能为空");
+            throw new CustomException(Code.ILLEGAL_PARAM, "日期不能为空");
         }
         LocalDateTime dt1 = dateToLocalDateTime(d1);
         LocalDateTime dt2 = dateToLocalDateTime(d2);
@@ -133,7 +133,7 @@ public class DateUtil extends DateUtils {
      */
     public static Date add(Date date, int amount, ChronoUnit unit) {
         if (null == date) {
-            throw new CustomException(SystemCode.ILLEGAL_PARAM, "日期不能为空");
+            throw new CustomException(Code.ILLEGAL_PARAM, "日期不能为空");
         }
         LocalDateTime ldt = dateToLocalDateTime(date);
         LocalDateTime _ldt = null;

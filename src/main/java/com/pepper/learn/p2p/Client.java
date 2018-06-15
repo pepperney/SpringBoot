@@ -1,4 +1,4 @@
-package com.pepper.learn.p2pdemo;
+package com.pepper.learn.p2p;
 
 import java.net.URI;
 import java.net.URISyntaxException;

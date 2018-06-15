@@ -2,10 +2,8 @@ package com.pepper.web.serviceImpl;
 
 import com.pepper.common.exception.NetException;
 import com.pepper.common.util.DateUtil;
-import com.pepper.web.dao.RetryTaskMapper;
 import com.pepper.web.model.entity.RetryTask;
-import com.pepper.web.service.RetryService;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.pepper.web.model.RetryService;
 import org.springframework.retry.annotation.Backoff;
 import org.springframework.retry.annotation.Recover;
 import org.springframework.retry.annotation.Retryable;
