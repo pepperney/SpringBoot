@@ -19,8 +19,8 @@ import org.springframework.context.annotation.Scope;
 /**
  * queue通过在mq管理后台创建
  * exchange通过代码创建
- * 将队列topic.rabbit与exchange绑定，binding_key为topic.exchange
- * 将队列topic.rocket与exchange绑定，binding_key为topic.#,模糊匹配
+ * 将队列queue_test_1与exchange_test绑定，binding_key为key.topic.test.1
+ * 将队列queue_test_2与exchange_test绑定，binding_key为key.topic.test.*
  */
 @Configuration
 @PropertySource("classpath:config/config.properties")

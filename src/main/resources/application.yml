@@ -23,8 +23,8 @@ api:
       need: false
       milliseconds: 300000
     securityChains:
-      - /**/api/userInfo=sign
-      - /**/api/**=sign
+      #- /**/api/userInfo=sign
+      #- /**/api/**=sign
       - /**/file/**=none
-      - /** = none
+      - /**=none
 

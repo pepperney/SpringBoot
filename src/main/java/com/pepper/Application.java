@@ -9,15 +9,18 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.core.annotation.Order;
 import org.springframework.retry.annotation.EnableRetry;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.web.filter.CharacterEncodingFilter;
 
 import javax.servlet.Filter;
 
 
 
-@SpringBootApplication
+
 @ComponentScan("com.pepper")
 @EnableRetry
+@EnableScheduling
+@SpringBootApplication
 public class Application {
 
 	public static void main(String[] args) {

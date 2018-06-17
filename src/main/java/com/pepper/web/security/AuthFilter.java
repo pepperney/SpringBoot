@@ -39,12 +39,7 @@ public class AuthFilter extends OncePerRequestFilter {
 
     protected static final AntPathMatcher antMatcher = new AntPathMatcher();
 
-
     private Map<String, String> urlAuthMap = new HashMap<>();
-
-    @Autowired
-    private Environment env;
-
 
     private MappingJackson2JsonView jackson2JsonView;
 
@@ -52,7 +47,7 @@ public class AuthFilter extends OncePerRequestFilter {
     private RedisHelper redisHelper;
 
     @Autowired
-    ApiConfig apiConfig;
+    private ApiConfig apiConfig;
 
 
     public AuthFilter(){
@@ -61,7 +56,6 @@ public class AuthFilter extends OncePerRequestFilter {
 
     @Override
     protected void initFilterBean() {
-        logger.info("===> Init security chains {}", apiConfig.getSecurityChains());
         for (String securityPattern : apiConfig.getSecurityChains()) {
             String[] strs = StringUtils.splitPreserveAllTokens(securityPattern, "=");
             String pattern = strs[0];
@@ -71,7 +65,7 @@ public class AuthFilter extends OncePerRequestFilter {
             }
             urlAuthMap.put(pattern, checks);
         }
-        logger.info("授权关系Map:{}", JsonUtil.toJson(urlAuthMap));
+        logger.info("===> Init security maps : {}", JsonUtil.toJson(urlAuthMap));
     }
 
     @Override
@@ -144,7 +138,7 @@ public class AuthFilter extends OncePerRequestFilter {
      * @param request
      */
     public void validateTimestamp(HttpServletRequest request) {
-        if (env.getActiveProfiles() != null && env.getActiveProfiles().length == 1 && "local".equals(env.getActiveProfiles()[0])) {
+        if (this.getEnvironment().getActiveProfiles() != null && this.getEnvironment().getActiveProfiles().length == 1 && "local".equals(this.getEnvironment().getActiveProfiles()[0])) {
             return;
         }
         String timestamp = getKeyFromRequest(request, key_timestamp);
