@@ -11,6 +11,7 @@ import org.springframework.core.annotation.Order;
 import org.springframework.retry.annotation.EnableRetry;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.web.filter.CharacterEncodingFilter;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import javax.servlet.Filter;
 
@@ -20,6 +21,7 @@ import javax.servlet.Filter;
 @ComponentScan("com.pepper")
 @EnableRetry
 @EnableScheduling
+//@EnableSwagger2
 @SpringBootApplication
 public class Application {
 

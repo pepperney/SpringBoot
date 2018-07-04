@@ -27,9 +27,9 @@ public class ScheduleTask {
     private static final Logger logger = LoggerFactory.getLogger(ScheduleTask.class);
 
     /**
-     * 每小时的第30分钟开始执行
+     * 每小时的第0分钟开始，30分钟执行一次
      */
-    private static final String SHOW_TIME_CRON = "* 30 * * * *";
+    private static final String SHOW_TIME_CRON = "* 0/30 * * * *";
 
     /**
      * 上一次调用后再次开始的时间间隔，此处为10min

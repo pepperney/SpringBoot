@@ -22,5 +22,5 @@ public interface UserInfoService {
 	
 	UserInfo getByToken(String token);
 
-	
+    void saveUser(UserInfo user);
 }

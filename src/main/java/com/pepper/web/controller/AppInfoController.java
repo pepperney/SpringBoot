@@ -22,7 +22,7 @@ public class AppInfoController {
 	
 	private static Logger log = LoggerFactory.getLogger(AppInfoController.class);
 
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+	@RequestMapping(value = "/appInfo", method = RequestMethod.GET)
 	public Map<String, String> home() {
 		DecimalFormat df = new DecimalFormat("0.00");
 

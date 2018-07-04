@@ -16,60 +16,70 @@ import com.pepper.web.service.UserInfoService;
 @Service("userInfoService")
 public class UserInfoServiceImpl implements UserInfoService {
 
-	@Autowired
-	UserInfoMapper userInfoMapper;
+    @Autowired
+    UserInfoMapper userInfoMapper;
 
-	@Autowired
-	RedisHelper redisHelper;
+    @Autowired
+    RedisHelper redisHelper;
 
-	@Override
-	public void addUser(UserInfo user) {
-		userInfoMapper.insertSelective(user);
-		
-	}
+    @Override
+    public void addUser(UserInfo user) {
+        userInfoMapper.insertSelective(user);
 
-	@Override
-	public void delUser(int userId) {
-		userInfoMapper.deleteByPrimaryKey(userId);
-		
-	}
+    }
 
-	@Override
-	public void updateUser(UserInfo user) {
-		userInfoMapper.updateByPrimaryKeySelective(user);
-		
-	}
+    @Override
+    public void delUser(int userId) {
+        userInfoMapper.deleteByPrimaryKey(userId);
 
-	@Override
-	public UserInfo getUser(int userId) {
-		return userInfoMapper.selectByPrimaryKey(userId);
-	}
-	
-	@Override
-	public List<UserInfo> getAllUsers() {
-		return userInfoMapper.selectAllUsers();
-	}
-	
-	
-	@Override
-	public UserInfo getUserDetail(int userId) {
-		UserInfo data = null;
-		String key = RedisKey.USER_ID.getKey() + userId;
-		String value = redisHelper.get(key);
-		if (StringUtils.isNotEmpty(value)) {
-			data = JsonUtil.jsonToObject(value, UserInfo.class);
-		} else {
-			data = userInfoMapper.selectByPrimaryKey(userId);
-			redisHelper.setex(key, RedisKey.USER_ID.getExpireTime(), JsonUtil.toJson(data));
-		}
-		return data;
-	}
+    }
 
-	@Override
-	public UserInfo getByToken(String token) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    @Override
+    public void updateUser(UserInfo user) {
+        userInfoMapper.updateByPrimaryKeySelective(user);
+
+    }
+
+    @Override
+    public UserInfo getUser(int userId) {
+        return userInfoMapper.selectByPrimaryKey(userId);
+    }
+
+    @Override
+    public List<UserInfo> getAllUsers() {
+        return userInfoMapper.selectAllUsers();
+    }
+
+
+    @Override
+    public UserInfo getUserDetail(int userId) {
+        UserInfo data = null;
+        String key = RedisKey.USER_ID.getKey() + userId;
+        String value = redisHelper.get(key);
+        if (StringUtils.isNotEmpty(value)) {
+            data = JsonUtil.jsonToObject(value, UserInfo.class);
+        } else {
+            data = userInfoMapper.selectByPrimaryKey(userId);
+            redisHelper.setex(key, RedisKey.USER_ID.getExpireTime(), JsonUtil.toJson(data));
+        }
+        return data;
+    }
+
+    @Override
+    public UserInfo getByToken(String token) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public void saveUser(UserInfo user) {
+        if (null == user.getUserId()) {
+            userInfoMapper.insert(user);
+        } else {
+            userInfoMapper.updateByPrimaryKeySelective(user);
+            redisHelper.del(RedisKey.USER_ID.getKey() + user.getUserId());
+        }
+    }
 
 
 }

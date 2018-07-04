@@ -1,24 +1,22 @@
 package com.pepper.web.controller;
 
+import com.pepper.common.consts.Const;
+import com.pepper.common.util.HttpUtil;
+import com.pepper.web.helper.RabbitSender;
+import com.pepper.web.model.CommonResp;
+import com.pepper.web.model.MqMsg;
+import com.pepper.web.model.entity.UserInfo;
+import com.pepper.web.service.ApiService;
+import com.pepper.web.service.UserInfoService;
+import io.swagger.annotations.Api;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
 import java.util.HashMap;
 import java.util.Map;
 
-import com.pepper.common.consts.Const;
-import com.pepper.web.model.MqMsg;
-import com.pepper.web.service.ApiService;
-import com.pepper.web.helper.RabbitSender;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-
-import com.pepper.common.util.HttpUtil;
-import com.pepper.web.model.CommonResp;
-import com.pepper.web.model.entity.UserInfo;
-import com.pepper.web.service.UserInfoService;
-
-@org.springframework.web.bind.annotation.RestController
+@RestController
 @RequestMapping("/api")
 public class ApiController {
 
@@ -38,11 +36,23 @@ public class ApiController {
      * @param userId
      * @return
      */
-    @RequestMapping("/userInfo")
+    @GetMapping("/userInfo")
     public ResponseEntity<Object> getUserInfo(@RequestParam("userId") int userId) {
         UserInfo data = userInfoService.getUserDetail(userId);
         return CommonResp.returnOKResult(data);
+    }
 
+
+    /**
+     * test for swagger
+     *
+     * @param user
+     * @return
+     */
+    @PostMapping("/saveUser")
+    public ResponseEntity<Object> getUserInfo(@RequestBody UserInfo user) {
+        userInfoService.saveUser(user);
+        return CommonResp.returnOK();
     }
 
 
@@ -53,9 +63,9 @@ public class ApiController {
      */
     @GetMapping("/send")
     public ResponseEntity<Object> send() {
-        MqMsg mqMsg1 = new MqMsg(Const.MQ_EXCHANGE_TEST,"key.topic.test.1","hello,this is test message_1");
+        MqMsg mqMsg1 = new MqMsg(Const.MQ_EXCHANGE_TEST, "key.topic.test.1", "hello,this is test message_1");
         rabbitSender.send(mqMsg1);
-        MqMsg mqMsg2 = new MqMsg(Const.MQ_EXCHANGE_TEST,"key.topic.test.2","hello,this is test message_2");
+        MqMsg mqMsg2 = new MqMsg(Const.MQ_EXCHANGE_TEST, "key.topic.test.2", "hello,this is test message_2");
         rabbitSender.send(mqMsg2);
         return CommonResp.returnOK();
     }
@@ -66,7 +76,7 @@ public class ApiController {
      *
      * @return
      */
-    @GetMapping("/testGet")
+    @GetMapping("/testRemote")
     public String get() {
         String url = "http://localhost:9090/api/userInfo";
         Map<String, String> params = new HashMap<>();
