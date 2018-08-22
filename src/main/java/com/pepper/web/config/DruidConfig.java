@@ -4,6 +4,8 @@ import java.sql.SQLException;
 
 import javax.sql.DataSource;
 
+import com.pepper.web.helper.MybatisInterceptor;
+import org.apache.ibatis.plugin.Interceptor;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -102,7 +104,7 @@ public class DruidConfig implements EnvironmentAware, TransactionManagementConfi
 	public StatFilter statFilter(){
 		StatFilter statFilter = new StatFilter();
 		statFilter.setLogSlowSql(Boolean.valueOf(environment.getProperty("spring.datasource.logSlowSql", "true")));
-		statFilter.setSlowSqlMillis(Long.valueOf(environment.getProperty("spring.datasource.slowSqlMillis", "0")));
+		statFilter.setSlowSqlMillis(Long.valueOf(environment.getProperty("spring.datasource.slowSqlMillis", "3000")));
 		statFilter.setMergeSql(true);
 		return statFilter;
 	}
@@ -128,4 +130,11 @@ public class DruidConfig implements EnvironmentAware, TransactionManagementConfi
 	public JdbcTemplate jdbcTemplate(DataSource dataSource) {
 		return new JdbcTemplate(dataSource);
 	}
+
+	@Bean
+	public Interceptor getInterceptor(){
+		return new MybatisInterceptor();
+	}
+
+
 }
