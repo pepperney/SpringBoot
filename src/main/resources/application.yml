@@ -7,7 +7,6 @@ spring:
   application:
     name: SpringBoot
 
-
 # config log
 logging:
   config: classpath:config/logback.xml

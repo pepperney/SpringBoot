@@ -21,7 +21,7 @@ sourceCompatibility = 1.8
 bootRepackage.enabled = true
 def pName = "${project.name}"
 def buildTime = new Date().format("yyyyMMdd-HHmm")
-def baseName = "SprintBoot"
+def baseName = "SpringBoot"
 
 repositories {
 	mavenCentral()
@@ -82,6 +82,12 @@ dependencies {
 
 	compile('io.springfox:springfox-swagger-ui:2.4.0')
 	compile('io.springfox:springfox-swagger2:2.4.0')
-	
+
+	compile('org.apache.logging.log4j:log4j-api:2.7')
+	compile('org.apache.logging.log4j:log4j-core:2.7')
+	compile('org.elasticsearch:elasticsearch:5.5.0')
+	compile('org.elasticsearch.client:transport:5.5.0')
+
+
 
 }

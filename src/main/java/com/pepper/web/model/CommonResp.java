@@ -1,12 +1,11 @@
 package com.pepper.web.model;
 
-import java.io.Serializable;
-
+import com.pepper.common.consts.Code;
+import com.pepper.common.util.JsonUtil;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
-import com.pepper.common.consts.Code;
-import com.pepper.common.util.JsonUtil;
+import java.io.Serializable;
 
 public class CommonResp implements Serializable {
 

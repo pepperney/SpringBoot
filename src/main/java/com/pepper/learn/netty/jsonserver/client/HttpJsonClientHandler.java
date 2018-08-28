@@ -42,7 +42,7 @@ public class HttpJsonClientHandler extends ChannelInboundHandlerAdapter {
 		user.setMobile("15500000000");
 		user.setSex("男");
 		user.setAge(25);
-		order.setOrderId(1);
+		order.setOrderId(1L);
 		order.setCustomer(user);
 		return order;
 	}

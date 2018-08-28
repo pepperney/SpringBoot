@@ -1,4 +1,3 @@
-### SpringBootProejct
 
 项目为SpringBoot项目,使用Gradle构建，使用到如下技术
  
@@ -7,6 +6,7 @@
  - Spring Retry重试机制
  - NIO通信框架Netty
  - Spring Scheule定时任务调度
+ - 搜索引擎ElasticSearch
  
 包结构说明：
  
