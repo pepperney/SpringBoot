@@ -38,19 +38,12 @@ public class Order implements Serializable{
 
 	private String providerCompany;//商品提供公司
 
-
-	
 	public Long getOrderId() {
 		return orderId;
 	}
+
 	public void setOrderId(Long orderId) {
 		this.orderId = orderId;
-	}
-	public UserInfo getCustomer() {
-		return customer;
-	}
-	public void setCustomer(UserInfo customer) {
-		this.customer = customer;
 	}
 
 	public String getSeqNum() {
@@ -85,8 +78,20 @@ public class Order implements Serializable{
 		this.address = address;
 	}
 
+	public double getCost() {
+		return cost;
+	}
+
 	public void setCost(double cost) {
 		this.cost = cost;
+	}
+
+	public UserInfo getCustomer() {
+		return customer;
+	}
+
+	public void setCustomer(UserInfo customer) {
+		this.customer = customer;
 	}
 
 	public String getGoodsName() {
