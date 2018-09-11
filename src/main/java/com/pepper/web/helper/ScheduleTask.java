@@ -10,14 +10,14 @@ import java.util.Date;
 
 /**
  * 定时任务
- * (1)cron属性: 这是一个时间表达式，可以通过简单的配置就能完成各种时间的配置，我们通过CRON表达式几乎可以完成任意的时间搭配，它包含了六或七个域：
+ * (1)cron属性: 这是一个时间表达式，可以通过简单的配置就能完成各种时间的配置，我们通过CRON表达式几乎可以完成任意的时间搭配，它包含了六或七个域
+ * 但是Spring的cron表达式只支持6个域，即不能设定年：
  * Seconds      : 可出现", - * /"四个字符，有效范围为0-59的整数
  * Minutes      : 可出现", - * /"四个字符，有效范围为0-59的整数
  * Hours        : 可出现", - * /"四个字符，有效范围为0-23的整数
  * DayofMonth   : 可出现", - * / ? L W C"八个字符，有效范围为0-31的整数
  * Month        : 可出现", - * /"四个字符，有效范围为1-12的整数或JAN-DEc
  * DayofWeek    : 可出现", - * / ? L C #"四个字符，有效范围为1-7的整数或SUN-SAT两个范围。1表示星期天，2表示星期一， 依次类推
- * Year         : 可出现", - * /"四个字符，有效范围为1970-2099年
  *
  * @See https://www.jianshu.com/p/c7492aeb35a1,https://www.jianshu.com/p/ef18af5a9c1d
  */
@@ -29,7 +29,7 @@ public class ScheduleTask {
     /**
      * 每小时的第0分钟开始，30分钟执行一次
      */
-    private static final String SHOW_TIME_CRON = "* 0/30 * * * *";
+    private static final String SHOW_TIME_CRON = "0 0/30 * * * *";
 
     /**
      * 上一次调用后再次开始的时间间隔，此处为10min
