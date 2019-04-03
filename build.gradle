@@ -59,6 +59,8 @@ dependencies {
 	
 	compile('com.alibaba:druid:1.1.5')
 	compile('mysql:mysql-connector-java:5.1.38')
+	compile "com.alibaba.csp:sentinel-core:1.5.1"
+	compile "com.alibaba.csp:sentinel-annotation-aspectj:1.5.1"
 
 	compile('commons-httpclient:commons-httpclient:3.1')
 	compile('commons-fileupload:commons-fileupload:1.3.1')
