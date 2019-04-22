@@ -3,6 +3,7 @@ package com.pepper.web.serviceImpl;
 import java.util.List;
 
 import com.pepper.common.consts.RedisKey;
+import com.pepper.web.aspect.Write;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,6 +24,7 @@ public class UserInfoServiceImpl implements UserInfoService {
     RedisHelper redisHelper;
 
     @Override
+    @Write
     public void addUser(UserInfo user) {
         userInfoMapper.insertSelective(user);
 
