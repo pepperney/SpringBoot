@@ -1,16 +1,20 @@
 package com.pepper.web.security;
 
 import com.pepper.common.consts.Code;
+import com.pepper.common.consts.Const;
 import com.pepper.common.consts.RedisKey;
 import com.pepper.common.exception.CustomException;
 import com.pepper.common.util.DateUtil;
 import com.pepper.common.util.IPUtil;
 import com.pepper.common.util.JsonUtil;
+import com.pepper.common.util.RandomUtil;
 import com.pepper.web.config.ApiConfig;
 import com.pepper.web.helper.RedisHelper;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.slf4j.MDC;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.util.AntPathMatcher;
@@ -56,6 +60,7 @@ public class AuthFilter extends OncePerRequestFilter {
 
     @Override
     protected void initFilterBean() {
+        if(!urlAuthMap.isEmpty()) return;
         for (String securityPattern : apiConfig.getSecurityChains()) {
             String[] strs = StringUtils.splitPreserveAllTokens(securityPattern, "=");
             String pattern = strs[0];
@@ -65,7 +70,7 @@ public class AuthFilter extends OncePerRequestFilter {
             }
             urlAuthMap.put(pattern, checks);
         }
-        logger.info("===> Init security maps : {}", JsonUtil.toJson(urlAuthMap));
+        logger.info("Init security maps : {}", JsonUtil.toJson(urlAuthMap));
     }
 
     @Override
@@ -75,7 +80,8 @@ public class AuthFilter extends OncePerRequestFilter {
         }
         String path = getRequestPath(request);
         boolean isMatch = false;
-
+        MDC.clear();
+        MDC.put(Const.MDC_KEY,RandomUtil.uuid());
         try {
             for (Map.Entry<String, String> entry : urlAuthMap.entrySet()) {
                 String pattern = entry.getKey();

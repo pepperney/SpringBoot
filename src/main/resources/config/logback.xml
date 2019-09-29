@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
   <jmxConfigurator/>
+  <property name="appName" value="springboot"/>
   <property name="LOG_FILE" value="${LOG_PATH:-${LOG_TEMP:-${java.io.tmpdir:-/tmp}}}/all.log"/>
-  <property name="LOG_FILE_ERR" value="${LOG_PATH:-${LOG_TEMP:-${java.io.tmpdir:-/tmp}}}/error.log"/>
 
   <include resource="org/springframework/boot/logging/logback/defaults.xml" />
   <include resource="org/springframework/boot/logging/logback/console-appender.xml" />
+  <include resource="visit-appender.xml"/>
+  <property name="FILE_LOG_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss.SSS} ${LOG_LEVEL_PATTERN:-%5p} ${PID:- } [%t] [RID : %X{REQUEST_ID}] ---  %-40.40logger{39}:%L  %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}"/>
 
   <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
     <encoder>
@@ -15,43 +17,13 @@
     <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
       <fileNamePattern>${LOG_FILE}.%d{yyyy-MM-dd}.%i</fileNamePattern>
       <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
-        <maxFileSize>512MB</maxFileSize>
+        <maxFileSize>1024MB</maxFileSize>
       </timeBasedFileNamingAndTriggeringPolicy>
     </rollingPolicy>
-    <encoder>
-      <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} ${LOG_LEVEL_PATTERN:-%5p} ${PID:- } --- [%t] %-40.40logger{39}:%line : [TxId : %X{PtxId} , SpanId : %X{PspanId}] %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}</pattern>
-    </encoder>
   </appender>
-
-  <appender name="FILE_ERR" class="ch.qos.logback.core.rolling.RollingFileAppender">
-    <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
-      <level>ERROR</level>
-    </filter>
-    <encoder>
-      <pattern>${FILE_LOG_PATTERN}</pattern>
-    </encoder>
-    <file>${LOG_FILE_ERR}</file>
-    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-      <fileNamePattern>${LOG_FILE_ERR}.%d{yyyy-MM-dd}.%i</fileNamePattern>
-      <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
-        <maxFileSize>512MB</maxFileSize>
-      </timeBasedFileNamingAndTriggeringPolicy>
-    </rollingPolicy>
-    <encoder>
-      <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} ${LOG_LEVEL_PATTERN:-%5p} ${PID:- } --- [%t] %-40.40logger{39}:%line : [TxId : %X{PtxId} , SpanId : %X{PspanId}] %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}</pattern>
-    </encoder>
-  </appender>
-
-  <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
-    <encoder>
-      <pattern>[%t] %-40.40logger{39}:%line : [TxId : %X{PtxId} , SpanId : %X{PspanId}] %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}</pattern>
-    </encoder>
-  </appender>
-
 
   <root level="INFO">
     <appender-ref ref="CONSOLE" />
     <appender-ref ref="FILE" />
-    <appender-ref ref="FILE_ERR" />
   </root>
 </configuration>

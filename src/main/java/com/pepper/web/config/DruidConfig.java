@@ -58,23 +58,23 @@ public class DruidConfig implements EnvironmentAware, TransactionManagementConfi
 	public DataSource dataSource(){
 		DruidDataSource druidDataSource = new DruidDataSource();
 		//基本属性 驱动 url、user、password
-		String url = "jdbc:mysql://HOST:PORT/DATABASE?useUnicode=true&characterEncoding=UTF8&zeroDateTimeBehavior=convertToNull&autoReconnect=true&failOverReadOnly=false&maxReconnects=10" ;
+		String url = "jdbc:mysql://HOST:PORT/DATABASE?useUnicode=true&characterEncoding=UTF8&zeroDateTimeBehavior=convertToNull&autoReconnect=true&failOverReadOnly=false&maxReconnects=10&useSSL=false" ;
 		url = url.replaceAll("HOST",host).replace("PORT",String.valueOf(port)).replaceAll("DATABASE",database);
 		druidDataSource.setUrl(url);
 		druidDataSource.setUsername(username);
 		druidDataSource.setPassword(password);
 		//配置初始化大小、最小、最大
-		druidDataSource.setMinIdle(10);                        
-		druidDataSource.setMaxActive(200);                     
-		druidDataSource.setInitialSize(10);    
-		 //配置获取连接等待超时的时间
-		druidDataSource.setMaxWait(60000);         
+		druidDataSource.setMinIdle(10);
+		druidDataSource.setMaxActive(200);
+		druidDataSource.setInitialSize(10);
+		//配置获取连接等待超时的时间
+		druidDataSource.setMaxWait(60000);
 		//配置一个连接在池中最小生存的时间,单位是毫秒
-		druidDataSource.setMinEvictableIdleTimeMillis(300000);   
+		druidDataSource.setMinEvictableIdleTimeMillis(300000);
 		//配置间隔多久才进行一次检测,检测需要关闭的空闲连接,单位是毫秒
-		druidDataSource.setTimeBetweenEvictionRunsMillis(60000); 
+		druidDataSource.setTimeBetweenEvictionRunsMillis(60000);
 		//默认的testWhileIdle=true,testOnBorrow=false,testOnReturn=false
-		druidDataSource.setValidationQuery("SELECT 1");         
+		druidDataSource.setValidationQuery("SELECT 1");
 		/*
 		 * 下面两行设置用于-->打开PSCache,并且指定每个连接上PSCache的大小
 		 * PSCache(preparedStatement)对支持游标的数据库性能提升巨大,比如说Oracle/DB2/SQLServer,但MySQL下建议关闭

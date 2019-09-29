@@ -1,11 +1,11 @@
-package com.pepper.common.aspectj;
+package com.pepper.web.aspect;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.reflect.MethodSignature;
 
 import java.lang.reflect.Method;
 
-public class AbstractCacheAspectSupport {
+public class AbstractCacheAspect {
 
 
     protected Method resolveMethod(ProceedingJoinPoint joinPoint){
@@ -13,10 +13,8 @@ public class AbstractCacheAspectSupport {
         MethodSignature signature = (MethodSignature)joinPoint.getSignature();
         //获取目标类
         Class<?> targetClass = joinPoint.getTarget().getClass();
-
         //获取目标方法
         Method method = getDeclaredMethodFor(targetClass,signature.getName(),signature.getMethod().getParameterTypes());
-
         if (method == null) {
             throw new IllegalStateException("Cannot resolve target method: " + signature.getMethod().getName());
         }

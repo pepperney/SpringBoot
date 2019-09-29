@@ -8,7 +8,6 @@ import com.pepper.web.model.MqMsg;
 import com.pepper.web.model.entity.UserInfo;
 import com.pepper.web.service.ApiService;
 import com.pepper.web.service.UserInfoService;
-import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -90,11 +89,42 @@ public class ApiController {
      *
      * @return
      */
-    @GetMapping("/retry")
+    @GetMapping("/testRetry")
     public ResponseEntity<Object> retry() {
         apiService.doRetry();
         return CommonResp.returnOK();
     }
 
+    /**
+     * test asyn
+     * @return
+     */
+    @GetMapping("/testAsyn")
+    public boolean testAsyn(){
+        UserInfo userInfo = userInfoService.getUserDetail(1);
+        apiService.logValue(userInfo);
+        return true;
+    }
+
+    /**
+     * test annotation CacheAble
+     * @param args
+     * @return
+     */
+    @GetMapping("/testCache")
+    public String testCache(String args){
+        return apiService.cacheValue(args);
+    }
+
+    /**
+     * test redis lock
+     * @param key
+     * @throws InterruptedException
+     */
+    @GetMapping("/testLock")
+    public void testLock(String key) throws InterruptedException {
+        new Thread(() -> apiService.addCount(key), "thread-1").start();
+        new Thread(() -> apiService.addCount(key), "thread-2").start();
+    }
 
 }

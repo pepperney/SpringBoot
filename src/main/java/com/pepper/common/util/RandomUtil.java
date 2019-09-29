@@ -1,6 +1,7 @@
 package com.pepper.common.util;
 
 import java.util.Random;
+import java.util.UUID;
 
 /**
  * @Auther: pei.nie
@@ -45,5 +46,13 @@ public class RandomUtil {
      */
     public static Integer getRandomInt(int bound){
         return random.nextInt(bound);
+    }
+
+    /**
+     * 获取uuid
+     * @return
+     */
+    public static String uuid(){
+        return UUID.randomUUID().toString().replaceAll("-","");
     }
 }

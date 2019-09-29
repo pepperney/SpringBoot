@@ -1,8 +1,12 @@
 package com.pepper.web.helper;
 
+import com.pepper.common.consts.Const;
 import com.pepper.common.util.DateUtil;
+import com.pepper.common.util.RandomUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.slf4j.MDC;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
@@ -26,24 +30,44 @@ public class ScheduleTask {
 
     private static final Logger logger = LoggerFactory.getLogger(ScheduleTask.class);
 
+
     /**
      * 每小时的第0分钟开始，30分钟执行一次
      */
     private static final String SHOW_TIME_CRON = "0 0/30 * * * *";
 
     /**
-     * 上一次调用后再次开始的时间间隔，此处为10min
+     * 上一次调用后再次开始的时间间隔
      */
-    private static final long PRINT_TIME_INTERVAL = 30 * 60 * 1000;
+    private static final long PRINT_TIME_INTERVAL = 60 * Const.MINUTES;
+
+    @Autowired
+    private RedisHelper redisHelper;
 
     @Scheduled(cron = SHOW_TIME_CRON)
-    public void showTimeTask() {
-        logger.info("task-[showTimeTask] begin execute,time is {}", DateUtil.getFormatDate(new Date(), "yyyy-MM-dd HH:mm:ss"));
+    public void cronTask() {
+        String key = this.getClass().getName() + "@cronTask";
+        String value = RandomUtil.uuid();
+        // 加锁防止多实例重复执行
+        if (!redisHelper.lock(key, value, 2 * Const.MINUTES)) return;
+        // 添加日志轨迹
+        MDC.put(Const.MDC_KEY, RandomUtil.uuid());
+        logger.info("scheduleTask--[cronTask] executed,time is {}", DateUtil.getDefaultFormatDate(new Date()));
+        // 解锁
+        redisHelper.unLock(key, value);
     }
 
     @Scheduled(fixedRate = PRINT_TIME_INTERVAL)
-    public void printTimeTask() {
-        logger.info("task-[printTimeTask] begin execute,time is {}", DateUtil.getFormatDate(new Date(), "yyyy-MM-dd HH:mm:ss"));
+    public void rateTask() {
+        String key = this.getClass().getName() + "@rateTask";
+        String value = RandomUtil.uuid();
+        // 加锁防止多实例重复执行
+        if (!redisHelper.lock(key, value, 2 * Const.MINUTES)) return;
+        // 添加日志轨迹
+        MDC.put(Const.MDC_KEY, RandomUtil.uuid());
+        logger.info("scheduleTask--[rateTask] executed,time is {}", DateUtil.getDefaultFormatDate(new Date()));
+        // 解锁
+        redisHelper.unLock(key, value);
     }
 
 

@@ -30,6 +30,7 @@ public class CustomException extends RuntimeException {
 		return this.code.getCode();
 	}
 
+	@Override
 	public String getMessage(){
 		return this.code.getMsg();
 	}

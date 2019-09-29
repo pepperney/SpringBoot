@@ -49,6 +49,7 @@ public class HttpUtil {
 
 	/**
 	 * 发送HTTP_GET请求
+	 *
 	 * @param reqURL
 	 * @param params
 	 * @param heads
@@ -73,7 +74,9 @@ public class HttpUtil {
 			}
 		}
 		reqURL = reqURL + (StringUtils.isNotBlank(queryString) ? "?" + queryString.substring(1) : "");
+		logger.info("-->HttpUtil#get请求,url={}", reqURL);
 		ResponseEntity<String> response = restTemplate.exchange(reqURL, HttpMethod.GET, requestEntity, String.class);
+		logger.info("<--HttpUtil#get请求,url={},出参={}", reqURL, response.getBody());
 		return response.getBody();
 	}
 
@@ -90,7 +93,9 @@ public class HttpUtil {
 			requestHeaders.set(HttpHeaders.CONTENT_TYPE, contentType);
 		}
 		HttpEntity<String> entity = new HttpEntity<String>(reqData, requestHeaders);
+		logger.info("-->HttpUtil#post请求,url={},入参={}", reqURL, reqData);
 		ResponseEntity<String> response = restTemplate.exchange(reqURL, HttpMethod.POST, entity, String.class);
+		logger.info("<--HttpUtil#get请求,url={},入参={},出参={}", reqURL, reqData, response.getBody());
 		return response.getBody();
 	}
 
@@ -110,7 +115,9 @@ public class HttpUtil {
 			linkedMultiValueMap.add(entry.getKey(), entry.getValue());
 		}
 		HttpEntity<MultiValueMap<String, String>> entity = new HttpEntity<MultiValueMap<String, String>>(linkedMultiValueMap, requestHeaders);
+		logger.info("-->HttpUtil#post请求,url={},入参={}", reqURL, JsonUtil.toJson(params));
 		ResponseEntity<String> response = restTemplate.exchange(reqURL, HttpMethod.POST, entity, String.class);
+		logger.info("<--HttpUtil#get请求,url={},入参={},出参={}", reqURL, JsonUtil.toJson(params), response.getBody());
 		return response.getBody();
 	}
 

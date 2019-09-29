@@ -1,6 +1,7 @@
 package com.pepper.common.util;
 
 import com.pepper.common.consts.Code;
+import com.pepper.common.consts.Const;
 import com.pepper.common.exception.CustomException;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.DateUtils;
@@ -154,6 +155,15 @@ public class DateUtil extends DateUtils {
         }
         LocalDateTime ldt = dateToLocalDateTime(date);
         return  ldt.format(DateTimeFormatter.ofPattern(pattern));
+    }
+
+    /**
+     * 获取格式为yyyy-MM-dd HH:mm:ss的日期字符串
+     * @param date
+     * @return
+     */
+    public static String getDefaultFormatDate(Date date){
+        return getFormatDate(date,Const.DATETIME_PATTERN);
     }
 
     /**
